@@ -74,16 +74,16 @@
 <script>
   const terminal = document.getElementById('terminal');
   const lines = [
-    "[系统日志] 尝试连接全球主服务器...",
-    "[系统日志] NASA核心权限请求中...",
-    "[ERROR] 验证失败：权限等级不足。",
-    "[系统响应] 正在尝试暴力破解...",
-    "[WARNING] 已触发AI自动防御协议。",
-    "[INFO] 病毒注入模块已激活。",
-    "[ALERT] 核心系统文件遭到修改。",
-    "[SYSTEM] 正在删除用户数据...",
-    "[FATAL ERROR] 你以为你是谁 😈",
-    "[LOG] 拦截失败，入侵已开始！",
+    "[系统日志] 正在连接设备服务中心...",
+    "[系统日志] 正在校验用户安全等级...",
+    "[ERROR] 权限验证失败：未知凭证。",
+    "[系统响应] 启动安全模式保护机制...",
+    "[WARNING] 可疑进程活动频繁，风险等级：高",
+    "[INFO] 正在锁定访问来源 IP...",
+    "[ALERT] 数据完整性检测失败，存在篡改痕迹。",
+    "[SYSTEM] 安全防护已激活，所有功能将受限。",
+    "[LOG] 异常通信已中断，正在重启协议堆栈...",
+    "[ALERT] 系统核心温度过高，进入防御状态...",
   ];
 
   let index = 0;
@@ -102,7 +102,7 @@
   function spawnPopup() {
     const popup = document.createElement('div');
     popup.className = 'popup';
-    popup.innerText = '系统异常\n即将关机';
+    popup.innerText = '⚠️ 系统异常\n安全模块被触发';
     popup.style.left = Math.random() * (window.innerWidth - 200) + 'px';
     popup.style.top = Math.random() * (window.innerHeight - 100) + 'px';
     document.body.appendChild(popup);
