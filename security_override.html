@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>系统异常</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: url('https://i.imgur.com/KH0r6Kq.png') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+    .lock-screen {
+      position: absolute;
+      top: 30%;
+      width: 100%;
+      text-align: center;
+    }
+    .time {
+      font-size: 60px;
+      font-weight: 300;
+    }
+    .date {
+      font-size: 20px;
+      margin-top: 5px;
+    }
+    .popup {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      text-align: center;
+      color: black;
+      font-size: 16px;
+      z-index: 9999;
+      animation: pop 0.3s ease-in-out;
+    }
+
+    @keyframes pop {
+      0% {transform: translateX(-50%) scale(0.5);}
+      100% {transform: translateX(-50%) scale(1);}
+    }
+
+    #statusbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 30px;
+      background: rgba(0,0,0,0.2);
+      display: flex;
+      justify-content: space-between;
+      padding: 0 15px;
+      font-size: 14px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="statusbar">
+    <div id="time">15:42</div>
+    <div>🔋100%</div>
+  </div>
+
+  <div class="lock-screen">
+    <div class="time" id="lock-time">15:42</div>
+    <div class="date" id="lock-date">Wednesday, July 10</div>
+  </div>
+
+  <script>
+    function updateTime() {
+      const now = new Date();
+      document.getElementById('time').textContent = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+      document.getElementById('lock-time').textContent = document.getElementById('time').textContent;
+      document.getElementById('lock-date').textContent = now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    // 弹窗刷屏
+    function showPopup(msg) {
+      const popup = document.createElement("div");
+      popup.className = "popup";
+      popup.innerHTML = `
+        <strong>⚠️ 系统异常</strong><br>${msg}<br><br>
+        <button onclick="this.parentNode.remove()">知道了</button>
+      `;
+      document.body.appendChild(popup);
+      setTimeout(() => {
+        if (popup) popup.remove();
+      }, 5000);
+    }
+
+    let messages = [
+      "正在检测系统安全性...",
+      "尝试重置系统保护机制...",
+      "访问受限资源失败。",
+      "警告：越狱风险检测到！",
+      "病毒警报：iOS设备被入侵！",
+      "😈 权限获取失败：你以为你是谁？"
+    ];
+
+    let i = 0;
+    setInterval(() => {
+      showPopup(messages[i % messages.length]);
+      i++;
+    }, 2500); // 每2.5秒弹窗一个
+
+    // 点击刷更多弹窗
+    document.body.addEventListener('click', () => {
+      showPopup("🧨 核心资源正在加载中...");
+    });
+  </script>
+
+</body>
+</html>
