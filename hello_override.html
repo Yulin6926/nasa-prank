@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>⚠️ 系统紧急协议启动中...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      color: #39FF14;
+      font-family: "Courier New", Courier, monospace;
+      overflow: hidden;
+    }
+
+    .overlay {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+    }
+
+    .overlay h1 {
+      font-size: 2em;
+      color: red;
+      margin-bottom: 20px;
+    }
+
+    .terminal {
+      width: 90%;
+      height: 80%;
+      background-color: black;
+      border: 1px solid #39FF14;
+      padding: 10px;
+      font-size: 14px;
+      overflow-y: auto;
+    }
+
+    .popup {
+      position: fixed;
+      width: 200px;
+      height: 100px;
+      background-color: white;
+      border: 2px solid red;
+      color: black;
+      font-weight: bold;
+      padding: 10px;
+      z-index: 10000;
+      animation: shake 0.5s infinite;
+    }
+
+    @keyframes shake {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(5px, -5px); }
+      50% { transform: translate(-5px, 5px); }
+      75% { transform: translate(5px, 5px); }
+      100% { transform: translate(-5px, -5px); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="overlay">
+  <h1>⚠️ 正在启动紧急系统覆盖协议...</h1>
+  <div class="terminal" id="terminal"></div>
+</div>
+
+<script>
+  const terminal = document.getElementById('terminal');
+  const lines = [
+    "[系统日志] 尝试连接全球主服务器...",
+    "[系统日志] NASA核心权限请求中...",
+    "[ERROR] 验证失败：权限等级不足。",
+    "[系统响应] 正在尝试暴力破解...",
+    "[WARNING] 已触发AI自动防御协议。",
+    "[INFO] 病毒注入模块已激活。",
+    "[ALERT] 核心系统文件遭到修改。",
+    "[SYSTEM] 正在删除用户数据...",
+    "[FATAL ERROR] 你以为你是谁 😈",
+    "[LOG] 拦截失败，入侵已开始！",
+  ];
+
+  let index = 0;
+  function typeLine() {
+    if (index < lines.length) {
+      terminal.innerHTML += lines[index] + "<br/>";
+      terminal.scrollTop = terminal.scrollHeight;
+      index++;
+      setTimeout(typeLine, 800);
+    } else {
+      setInterval(spawnPopup, 500);
+    }
+  }
+  typeLine();
+
+  function spawnPopup() {
+    const popup = document.createElement('div');
+    popup.className = 'popup';
+    popup.innerText = '系统异常\n即将关机';
+    popup.style.left = Math.random() * (window.innerWidth - 200) + 'px';
+    popup.style.top = Math.random() * (window.innerHeight - 100) + 'px';
+    document.body.appendChild(popup);
+  }
+</script>
+
+</body>
+</html>
